@@ -4,32 +4,61 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Problems 3
-        // Convert Celsius to Fahrenheit and count vowels in a sentence.
-        Console.Write("Please enter the temperature in Celsius: ");
-        double c = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine($"Fahrenheit: {CelsiusToFahrenheit(c):F1}");
-
-        Console.Write("Please enter the English text: ");
-        string text = Console.ReadLine();
-        Console.WriteLine($"Number of vowels: {CountVowels(text)}");
-    }
-
-    static double CelsiusToFahrenheit(double c)
-    {
-        return c * 9 / 5 + 32;
-    }
-
-    static int CountVowels(string text)
-    {
-        int count = 0;
-        foreach (char letter in text.ToLower())
+        // Problems 4
+        // Read valid numbers using a method in the calculator.
+        string choise = string.Empty;
+        do
         {
-            if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u')
+            int fnum = ReadNumber("Please enter a first number. ");
+            int snum = ReadNumber("Please enter a second number. ");
+            Console.WriteLine("+ is addition. ");
+            Console.WriteLine("- is subtraction. ");
+            Console.WriteLine("* is multiplication. ");
+            Console.WriteLine("/ is division. ");
+            Console.WriteLine("0 is. exit");
+            Console.Write("Please enter the calculation method. ");
+            choise = Console.ReadLine();
+            switch (choise)
             {
-                count++;
+                case "+":
+                    Console.WriteLine($"{fnum} + {snum} = {fnum + snum}");
+                    break;
+
+                case "-":
+                    Console.WriteLine($"{fnum} - {snum} = {fnum - snum}");
+                    break;
+
+                case "*":
+                    Console.WriteLine($"{fnum} * {snum} = {fnum * snum}");
+                    break;
+
+                case "/":
+                    if (snum == 0)
+                    {
+                        Console.WriteLine("Division by zero is not allowed. ");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{fnum} / {snum} = {(double)fnum / snum:F2}");
+                    }
+                    break;
+
+                case "0":
+                    break;
             }
+
+        } while (choise != "0");
+    }
+
+    static int ReadNumber(string question)
+    {
+        int number;
+        Console.Write(question);
+        while (!int.TryParse(Console.ReadLine(), out number))
+        {
+            Console.WriteLine("Please enter a valid number.");
+            Console.Write(question);
         }
-        return count;
+        return number;
     }
 }
