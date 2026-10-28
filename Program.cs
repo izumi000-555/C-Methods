@@ -4,31 +4,32 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Problems 2
-        // Check even numbers and find the larger of two numbers.
-        Console.WriteLine(IsEven(2));
-        Console.WriteLine(IsEven(7));
-        Console.WriteLine(IsEven(12));
+        // Problems 3
+        // Convert Celsius to Fahrenheit and count vowels in a sentence.
+        Console.Write("Please enter the temperature in Celsius: ");
+        double c = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine($"Fahrenheit: {CelsiusToFahrenheit(c):F1}");
 
-        Console.WriteLine(Max(3, 8));
-        Console.WriteLine(Max(10, 4));
-        Console.WriteLine(Max(6, 6));
+        Console.Write("Please enter the English text: ");
+        string text = Console.ReadLine();
+        Console.WriteLine($"Number of vowels: {CountVowels(text)}");
     }
 
-    static bool IsEven(int n)
+    static double CelsiusToFahrenheit(double c)
     {
-        return n % 2 == 0;
+        return c * 9 / 5 + 32;
     }
 
-    static int Max(int a, int b)
+    static int CountVowels(string text)
     {
-        if (a >= b)
+        int count = 0;
+        foreach (char letter in text.ToLower())
         {
-            return a;
+            if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u')
+            {
+                count++;
+            }
         }
-        else
-        {
-            return b;
-        }
+        return count;
     }
 }
