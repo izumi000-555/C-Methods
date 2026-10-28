@@ -4,61 +4,50 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Problems 4
-        // Read valid numbers using a method in the calculator.
-        string choise = string.Empty;
-        do
+        // Problems 5
+        // Print prime numbers from 1 to 100 and find the sum of digits.
+        for (int i = 1; i <= 100; i++)
         {
-            int fnum = ReadNumber("Please enter a first number. ");
-            int snum = ReadNumber("Please enter a second number. ");
-            Console.WriteLine("+ is addition. ");
-            Console.WriteLine("- is subtraction. ");
-            Console.WriteLine("* is multiplication. ");
-            Console.WriteLine("/ is division. ");
-            Console.WriteLine("0 is. exit");
-            Console.Write("Please enter the calculation method. ");
-            choise = Console.ReadLine();
-            switch (choise)
+            if (IsPrime(i))
             {
-                case "+":
-                    Console.WriteLine($"{fnum} + {snum} = {fnum + snum}");
-                    break;
-
-                case "-":
-                    Console.WriteLine($"{fnum} - {snum} = {fnum - snum}");
-                    break;
-
-                case "*":
-                    Console.WriteLine($"{fnum} * {snum} = {fnum * snum}");
-                    break;
-
-                case "/":
-                    if (snum == 0)
-                    {
-                        Console.WriteLine("Division by zero is not allowed. ");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{fnum} / {snum} = {(double)fnum / snum:F2}");
-                    }
-                    break;
-
-                case "0":
-                    break;
+                Console.Write(i + " ");
             }
+        }
+        Console.WriteLine();
 
-        } while (choise != "0");
+        Console.Write("Please enter a number: ");
+        int number = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine($"Sum of digits: {SumOfDigits(number)}");
     }
 
-    static int ReadNumber(string question)
+    static bool IsPrime(int n)
     {
-        int number;
-        Console.Write(question);
-        while (!int.TryParse(Console.ReadLine(), out number))
+        if (n < 2)
         {
-            Console.WriteLine("Please enter a valid number.");
-            Console.Write(question);
+            return false;
         }
-        return number;
+
+        for (int i = 2; i * i <= n; i++)
+        {
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static int SumOfDigits(int n)
+    {
+        long number = Math.Abs((long)n);
+        int sum = 0;
+
+        while (number > 0)
+        {
+            sum += (int)(number % 10);
+            number /= 10;
+        }
+
+        return sum;
     }
 }
